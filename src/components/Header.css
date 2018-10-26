@@ -3,13 +3,24 @@
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  color: white;
 }
 
 .Header a {
-  color: white;
   font-weight: 600;
+  color: inherit;
 }
 
-.Header a + a {
+.Header a+a {
+  margin-left: 1rem;
+}
+
+.Header .logout {
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.Header span+span {
   margin-left: 1rem;
 }
