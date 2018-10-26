@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { UserConsumer } from '../contexts/UserContext';
+import { fromRenderProps } from 'recompose';
 
-const Header = () => {
+const Header = ({ username, logged, onLogout }) => {
   return (
     <div className="Header">
       <div>
@@ -12,26 +13,25 @@ const Header = () => {
         <Link to="/secrets">비밀</Link>
       </div>
       <div>
-        <UserConsumer>
-          {({ state, actions }) => {
-            if (state.logged) {
-              return (
-                <>
-                  <span>
-                    안녕하세요 <b>{state.username}</b>!
-                  </span>
-                  <span className="logout" onClick={actions.logout}>
-                    로그아웃
-                  </span>
-                </>
-              );
-            }
-            return <Link to="/login">로그인</Link>;
-          }}
-        </UserConsumer>
+        {logged ? (
+          <>
+            <span>
+              안녕하세요 <b>{username}</b>!
+            </span>
+            <span className="logout" onClick={onLogout}>
+              로그아웃
+            </span>
+          </>
+        ) : (
+          <Link to="/login">로그인</Link>
+        )}
       </div>
     </div>
   );
 };
 
-export default Header;
+export default fromRenderProps(UserConsumer, ({ state, actions }) => ({
+  username: state.username,
+  logged: state.logged,
+  onLogout: actions.logout,
+}))(Header);

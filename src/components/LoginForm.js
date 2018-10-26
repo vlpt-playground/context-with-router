@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { compose, fromRenderProps } from 'recompose';
+import { UserConsumer } from '../contexts/UserContext';
 
 class LoginForm extends Component {
   state = {
@@ -52,4 +54,10 @@ class LoginForm extends Component {
   }
 }
 
-export default withRouter(LoginForm);
+const enhance = compose(
+  withRouter,
+  fromRenderProps(UserConsumer, ({ state, actions }) => ({
+    onLogin: actions.login,
+  })),
+);
+export default enhance(LoginForm);
