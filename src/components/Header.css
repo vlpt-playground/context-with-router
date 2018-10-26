@@ -1,0 +1,15 @@
+.Header {
+  background: black;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Header a {
+  color: white;
+  font-weight: 600;
+}
+
+.Header a + a {
+  margin-left: 1rem;
+}
