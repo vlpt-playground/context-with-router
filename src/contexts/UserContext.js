@@ -23,6 +23,21 @@ class UserProvider extends Component {
     username: null,
   };
 
+  componentDidMount() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      try {
+        const parsed = JSON.parse(user);
+        this.setState({
+          logged: true,
+          username: parsed.username,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
   actions = {
     login: form => {
       const { username, password } = form;
@@ -37,6 +52,9 @@ class UserProvider extends Component {
         logged: true,
         username,
       });
+
+      // 로컬 스토리지에 저장!
+      localStorage.setItem('user', JSON.stringify(user));
 
       return true;
     },
