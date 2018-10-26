@@ -1,6 +1,5 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
-import { UserConsumer } from '../contexts/UserContext';
 
 const Login = () => {
   return (
