@@ -25,7 +25,7 @@ class LoginForm extends Component {
         <input
           type="password"
           name="password"
-          value={this.state.username}
+          value={this.state.password}
           onChange={this.handleChange}
           placeholder="비밀번호"
         />
