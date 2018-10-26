@@ -8,20 +8,23 @@ import About from './pages/About';
 import Secrets from './pages/Secrets';
 import Me from './pages/Me';
 import Login from './pages/Login';
+import { UserProvider } from './contexts/UserContext';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header />
-        <div>
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/secrets" component={Secrets} />
-          <Route path="/me" component={Me} />
-          <Route path="/login" component={Login} />
+      <UserProvider>
+        <div className="App">
+          <Header />
+          <div>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/secrets" component={Secrets} />
+            <Route path="/me" component={Me} />
+            <Route path="/login" component={Login} />
+          </div>
         </div>
-      </div>
+      </UserProvider>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import { UserConsumer } from '../contexts/UserContext';
 
 const Header = () => {
   return (
@@ -11,7 +12,23 @@ const Header = () => {
         <Link to="/secrets">비밀</Link>
       </div>
       <div>
-        <Link to="/login">로그인</Link>
+        <UserConsumer>
+          {({ state, actions }) => {
+            if (state.logged) {
+              return (
+                <>
+                  <span>
+                    안녕하세요 <b>{state.username}</b>!
+                  </span>
+                  <span className="logout" onClick={actions.logout}>
+                    로그아웃
+                  </span>
+                </>
+              );
+            }
+            return <Link to="/login">로그인</Link>;
+          }}
+        </UserConsumer>
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class LoginForm extends Component {
   state = {
     username: '',
     password: '',
+    error: false,
   };
   handleChange = e => {
     this.setState({
@@ -12,6 +14,20 @@ class LoginForm extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    const result = this.props.onLogin({
+      username: this.state.username,
+      password: this.state.password,
+    });
+
+    // 로그인 실패
+    if (!result) {
+      this.setState({
+        error: true,
+      });
+      return;
+    }
+    // 홈으로 이동
+    this.props.history.push('/');
   };
   render() {
     return (
@@ -25,14 +41,15 @@ class LoginForm extends Component {
         <input
           type="password"
           name="password"
-          value={this.state.username}
+          value={this.state.password}
           onChange={this.handleChange}
           placeholder="비밀번호"
         />
         <button type="submit">로그인</button>
+        {this.state.error && <div>로그인 에러!</div>}
       </form>
     );
   }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);
