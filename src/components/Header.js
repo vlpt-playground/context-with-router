@@ -16,7 +16,11 @@ const Header = ({ username, logged, onLogout }) => {
         {logged ? (
           <>
             <span>
-              안녕하세요 <b>{username}</b>!
+              안녕하세요
+              <b>
+                <Link to="/me">{username}</Link>
+              </b>
+              !
             </span>
             <span className="logout" onClick={onLogout}>
               로그아웃
